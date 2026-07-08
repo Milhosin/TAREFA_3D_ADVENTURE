@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10182b293af8470469d0891665f4bae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy.EnemyBase
-  colliderNew: {fileID: 0}
+  colliderNew: {fileID: 6637481530201560095}
   flashColor: {fileID: 3351045652923059629}
   startLife: 10
   _currentLife: 0
