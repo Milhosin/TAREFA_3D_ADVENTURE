@@ -16,6 +16,9 @@ public class GunBase : MonoBehaviour
     {
         while (true)
         {
+            // ADICIONADO: Avisa se a corrotina está rodando o tiro
+            Debug.Log("GunBase: Rodando o loop e chamando o Shoot()!");
+
             Shoot();
             yield return new WaitForSeconds(timeBetweenShoot);
         }
@@ -30,12 +33,23 @@ public class GunBase : MonoBehaviour
     public void StartShoot()
     {
         StopShoot();
-        _currentCoroutine = StartCoroutine(ShootCoroutine());
+
+        if (gameObject.activeInHierarchy)
+        {
+            // ADICIONADO: Avisa que passou no teste e vai ligar a corrotina
+            Debug.Log("GunBase: Objeto ativo! Iniciando a corrotina de tiro...");
+            _currentCoroutine = StartCoroutine(ShootCoroutine());
+        }
+        else
+        {
+            // ADICIONADO: Avisa se o Unity barrou o tiro por estar inativo
+            Debug.LogWarning("GunBase: O tiro NÃO iniciou porque o GameObject está INATIVO!");
+        }
     }
+
     public void StopShoot()
     {
         if (_currentCoroutine != null)
             StopCoroutine(_currentCoroutine);
     }
-
 }

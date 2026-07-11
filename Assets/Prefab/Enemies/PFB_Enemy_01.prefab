@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 7705302955625961060}
   m_Layer: 0
   m_Name: PFB_Enemy_01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,7 +81,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy.EnemyBase
   colliderNew: {fileID: 6637481530201560095}
   flashColor: {fileID: 3351045652923059629}
+  particleSystemNew: {fileID: 0}
   startLife: 10
+  lookAtPlayer: 0
   _currentLife: 0
   _animationBase: {fileID: 7705302955625961060}
   startAnimationDuration: 0.2

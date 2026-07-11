@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAbilityBase : MonoBehaviour
 {
-    protected Player player;
+    public Player player;
 
     protected Inputs inputs;
 

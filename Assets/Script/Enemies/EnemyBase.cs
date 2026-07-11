@@ -10,8 +10,10 @@ namespace Enemy
     {
         public Collider colliderNew;
         public FlashColor flashColor;
+        public ParticleSystem particleSystemNew;
 
         public float startLife = 10f;
+        public bool lookAtPlayer = false;
 
         [SerializeField] private float _currentLife;
 
@@ -23,10 +25,18 @@ namespace Enemy
         public Ease startAnimationEase = Ease.OutBack;
         public bool startWithBornAnimation = true;
 
+        private Player _player;
+
 
         private void Awake()
         {
             Init();
+        }
+
+        [System.Obsolete]
+        private void Start()
+        {
+            _player = GameObject.FindObjectOfType<Player>();
         }
 
         protected void ResetLife()
@@ -38,7 +48,7 @@ namespace Enemy
         {
             ResetLife();
 
-            if(startWithBornAnimation)
+            if (startWithBornAnimation)
                 BornAnimation();
         }
 
@@ -59,10 +69,13 @@ namespace Enemy
         public void OnDamage(float f)
         {
             if (flashColor != null) flashColor.Flash();
+            if (particleSystemNew != null) particleSystemNew.Emit(15);
+
+            transform.position -= transform.forward;
 
             _currentLife -= f;
 
-            if(_currentLife <= 0)
+            if (_currentLife <= 0)
             {
                 Kill();
             }
@@ -81,18 +94,35 @@ namespace Enemy
         }
         #endregion
 
-        //debug
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                OnDamage(5f);            }
-        }
 
         public void Damage(float damage)
         {
             Debug.Log("Damage");
             OnDamage(damage);
         }
+        public void Damage(float damage, Vector3 dir)
+        {
+            OnDamage(damage);
+            transform.DOMove(transform.position -= dir, .1f);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            Player p = collision.transform.GetComponent<Player>();
+
+            if (p != null)
+            {
+                p.Damage(1);
+            }
+        }
+
+        public virtual void Update()
+        {
+            if (lookAtPlayer)
+            {
+                transform.LookAt(_player.transform.position);
+            }
+        }
+
     }
 }

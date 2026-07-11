@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -98,3 +98,4 @@ public class PlayerController : MonoBehaviour
         CharController.Move(new Vector3(0, Velocity.y, 0) * Time.deltaTime);
     }
 }
+*/
